@@ -68,6 +68,9 @@ class LinkedList:
     # TASK 1: REVERSE
     # --------------------
     def reverse(self):
+        """
+        Reverses the linked list in place.
+        """
         prev = None
         current = self.head
         while current:
@@ -81,6 +84,16 @@ class LinkedList:
     # TASK 2: MERGE SORT
     # --------------------
     def merge_sort(self, head=None):
+        """
+        Sorts a linked list in ascending order using the merge sort algorithm.
+
+        Args:
+            head (Node, optional): The head node of the linked list to sort.
+                                   If None, sorts the entire list starting from self.head.
+
+        Returns:
+            Node: The head node of the sorted linked list.
+        """
         if head is None:
             head = self.head
 
@@ -100,11 +113,23 @@ class LinkedList:
             self.head = sorted_list
         return sorted_list
     
-    # Utility function to get the middle of the linked list
-    # - 'slow' pointer moves 1 step at a time
-    # - 'fast' pointer moves 2 steps
-    # When the fast pointer reaches the end, the slow one is at the middle.
     def _get_middle(self, head):
+        """
+        Helper for merge sort:
+        Finds and returns the middle node of a linked list.
+
+        Uses the fast/slow pointer technique:
+        - slow moves one step at a time
+        - fast moves two steps at a time
+        When fast reaches the end, slow is at the middle.
+
+        Args:
+            head (Node): The head node of the linked list.
+
+        Returns:
+            Node: The middle node of the linked list.
+                  For even-length lists, this returns the second (right) middle node.
+        """
         if head is None:
             return head
         slow = head
@@ -114,18 +139,23 @@ class LinkedList:
             fast = fast.next.next
         return slow
 
-    def _sorted_merge(self, a, b):
-        if a is None:
-            return b
-        if b is None:
-            return a
+    def _sorted_merge(self, l, r):
+        """
+        Helper for merge sort:
+        Merges two sorted linked list halves (l and r) into one sorted list.
+        Returns the head of the merged sorted list.
+        """
+        if l is None:
+            return r
+        if r is None:
+            return l
 
-        if a.data <= b.data:
-            result = a
-            result.next = self._sorted_merge(a.next, b)
+        if l.data <= r.data:
+            result = l
+            result.next = self._sorted_merge(l.next, r)
         else:
-            result = b
-            result.next = self._sorted_merge(a, b.next)
+            result = r
+            result.next = self._sorted_merge(l, r.next)
         return result
 
     # ------------------------------
@@ -133,6 +163,16 @@ class LinkedList:
     # ------------------------------
     @staticmethod
     def merge_two_sorted_lists(list1, list2):
+        """
+        Merges two sorted linked lists into a single sorted linked list.
+
+        Args:
+            list1 (LinkedList): The first sorted linked list.
+            list2 (LinkedList): The second sorted linked list.
+
+        Returns:
+            LinkedList: A new linked list containing all elements from list1 and list2 in sorted order.
+        """
         dummy = Node(0)
         tail = dummy
 
