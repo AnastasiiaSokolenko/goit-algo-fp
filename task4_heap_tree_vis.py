@@ -51,9 +51,10 @@ def build_heap_tree(heap, index=0):
     return node
 
 if __name__ == '__main__':
-    # Припустимо, що у нас є бінарна купа у вигляді списку
     heap_list = [1, 3, 5, 7, 9, 2]
-    heapq.heapify(heap_list) # Перетворюємо список у min-купу
+    
+    # Перетворюємо список у купу
+    heapq.heapify(heap_list) 
     print("Купа у вигляді списку:", heap_list)    # [1, 3, 2, 7, 9, 5]
 
     # Побудова дерева з купи
